@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+	<link rel="stylesheet" type="text/css" href="styles.css">
+<head>
+	<title>re(ADE);</title>
+
+</head>
+<body>
+
+	<img src="images/part1.jpg" id="part1" width="20%">
+
+	<div id="track1">
+		<button onclick="podcastPlay()" class="button1" id="podcastPlay"><img class="picture" src="images/start.jpg" height="500px"></button>
+		<button onclick="podcastPause()" class="button1" id="podcastPause"><img class="picture" src="images/pause.jpg" height="500px"></button>
+		<button onclick="podcastStop()" class="button1" id="podcastStop"><img class="picture" src="images/stop.jpg" height="500px"></button>
+	</div>
+
+	<div id="track2">
+		<img src="images/part2_black.jpg" id="part2" width="15%">
+		<div id="movingIcon"></div>
+		<div onclick="remixPlay()" class="button2" id="remixPlay">PLAY</div>
+		<div onclick="remixPause()" class="button2" id="remixPause">PAUSE</div>
+		<div onclick="remixStop()" class="button2" id="remixStop">STOP</div>
+	</div>
+
+		<audio id="podcastAudio">
+			<source src="audio/podcastFinal.wav" type="audio/wav">
+				Your browser does not support audio.
+		</audio>
+
+		<audio id="remixAudio">
+			<source src="audio/remixFinal.wav" type="audio/wav">
+				Your browser does not support audio.
+		</audio>
+		
+	<div id="instruments">
+		<img src="images/piano.jpg" id="piano" width="20%">
+		<img src="images/pipa.jpg" id="pipa" width="20%">
+		<img src="images/erhu.jpg" id="erhu" width="20%">	
+	</div>
+
+
+
+		<script>
+			var pa = document.getElementById("podcastAudio");
+			var ra = document.getElementById("remixAudio");
+			var toCheck1;
+			var toCheck2;
+
+
+			function checkTime1() {
+				console.log(pa.currentTime);
+				if (pa.currentTime > 148) {
+					document.getElementById("pipa").style.display = "block";
+				}
+				if (pa.currentTime > 78) {
+					document.getElementById("erhu").style.display = "block";
+				}
+			}
+
+			function podcastPlay() {
+				pa.play();
+				toCheck1 = setInterval(checkTime1, 1000);			
+			}
+
+			function podcastPause() {
+				pa.pause();
+			}
+
+			function podcastStop() {
+				pa.pause();
+				pa.currentTime = 0;
+				document.getElementById("pipa").style.display = "none";
+				document.getElementById("erhu").style.display = "none";
+			}
+
+
+			function checkTime2() {
+				console.log(ra.currentTime);
+				if (ra.currentTime > 67) {
+					document.getElementById("pipa").style.display = "block";
+				}
+				if (ra.currentTime > 34) {
+					document.getElementById("erhu").style.display = "block";
+				}
+			}
+
+			function remixPlay() {
+				ra.play();
+				document.getElementById("movingIcon").style.display = "block";
+				document.getElementById("piano").style.display = "block";
+				toCheck2 = setInterval(checkTime2, 1000); 
+			}
+
+			function remixPause() {
+				ra.pause();
+			}
+
+			function remixStop() {
+				ra.pause();
+				ra.currentTime = 0;
+				document.getElementById("piano").style.display = "none";
+				document.getElementById("pipa").style.display = "none";
+				document.getElementById("erhu").style.display = "none";
+				document.getElementById("movingIcon").style.display = "none";
+			}
+
+		</script>
+</body>
+
+
+</html>
